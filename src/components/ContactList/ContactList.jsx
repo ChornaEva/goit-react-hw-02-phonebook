@@ -1,20 +1,37 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {
+  UsersContactList,
+  ContactListItem,
+  UserName,
+  UserNumber,
+  ContactListButton,
+} from "./ContactList.styled";
 
 const ContactList = ({ contacts, deleteContact }) => {
   return (
     <div>
-      <ul>
+      <UsersContactList>
         {contacts.map((contact) => (
-          <li key={contact.id}>
-            <p>{contact.name}</p>
-            <p>{contact.number}</p>
-            <button onClick={() => deleteContact(contact.id)}> Delete</button>
-          </li>
+          <ContactListItem key={contact.id}>
+            <UserName>{contact.name}</UserName>
+            <UserNumber>{contact.number}</UserNumber>
+            <ContactListButton onClick={() => deleteContact(contact.id)}>
+              {" "}
+              Delete
+            </ContactListButton>
+          </ContactListItem>
         ))}
-      </ul>
+      </UsersContactList>
     </div>
   );
+};
+ContactList.propTypes = {
+  contacts: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    number: PropTypes.string,
+  }),
 };
 
 export default ContactList;
